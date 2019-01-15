@@ -38,8 +38,10 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
-                    <reload>automatic</reload>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <!-- On some configs this causes shutdown of context on -->
+                    <!-- a page load so disabled. -->
+                    <!-- <reload>automatic</reload> -->
+                    <!-- <scanIntervalSeconds>1</scanIntervalSeconds> -->
                 </configuration>
             </plugin>
         </plugins>
@@ -52,11 +54,12 @@
             <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-          <groupId>org.eclipse.jetty</groupId>
-          <artifactId>jetty-io</artifactId>
-          <version>${jetty.version}</version>
-        </dependency>
+        <!-- See comment at jetty plugin -->
+        <!-- <dependency> -->
+        <!--   <groupId>org.eclipse.jetty</groupId> -->
+        <!--   <artifactId>jetty-io</artifactId> -->
+        <!--   <version>${jetty.version}</version> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
