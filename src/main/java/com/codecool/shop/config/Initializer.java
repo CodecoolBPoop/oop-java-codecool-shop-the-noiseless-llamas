@@ -44,9 +44,9 @@ public class Initializer implements ServletContextListener {
 
         //setting up shopping carts
         ShoppingCart cart = new ShoppingCart("default", "default");
-        for (Product product: productDataStore.getAll()) {
+        /*for (Product product: productDataStore.getAll()) {
             cart.addToCart(product);
-        }
+        }*/
         shoppingCartDataStore.add(cart);
     }
 }

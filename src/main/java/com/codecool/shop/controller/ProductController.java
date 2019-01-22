@@ -34,8 +34,11 @@ public class ProductController extends HttpServlet {
         String productId = req.getParameter("id");
         if (productId != null) {
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
-            productToAdd.incrementQuantityInCartBy(1);
-            shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
+            ShoppingCart cart = shoppingCartsDataStore.find(1);
+            cart.addToCart(productToAdd);
+
+           // productToAdd.incrementQuantityInCartBy(1);
+            //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
             System.out.println(productDataStore.getAll().toString());
         }
 //        Map params = new HashMap<>();

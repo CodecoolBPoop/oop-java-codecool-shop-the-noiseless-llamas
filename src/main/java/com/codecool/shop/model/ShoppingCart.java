@@ -11,6 +11,14 @@ public class ShoppingCart extends BaseModel {
        super(name, description);
    }
 
+   public boolean contains(Product productToCheck) {
+       boolean contains = false;
+       for (Product product: productList) {
+           if (product.getId() == productToCheck.getId()) contains = true;
+       }
+       return contains;
+   }
+
     public ArrayList<Product> getProductList() {
         return productList;
     }
