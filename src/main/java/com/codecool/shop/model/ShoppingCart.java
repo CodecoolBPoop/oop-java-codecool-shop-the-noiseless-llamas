@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ShoppingCart extends BaseModel {
     private ArrayList<Product> productList = new ArrayList<>();
+    private int numberOfItems;
 
 
    public ShoppingCart(String name, String description) {
@@ -12,9 +13,19 @@ public class ShoppingCart extends BaseModel {
 
    public void addToCart(Product product) {
        productList.add(product);
+       numberOfItems ++;
    }
 
    public void removeFromCart(Product product) {
        productList.remove(product);
    }
+
+   public void addToCartById(int id){
+
+
+   }
+
+    public int getNumberOfItems() {
+        return numberOfItems;
+    }
 }
