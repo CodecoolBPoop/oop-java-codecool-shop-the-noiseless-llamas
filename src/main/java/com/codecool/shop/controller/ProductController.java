@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -32,7 +30,10 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         String categoryIdUrl =  req.getParameter("category_id");
-        Integer categoryId = gettingProductCategoryFromUrl(productDataStore, categoryIdUrl);
+        String supplierIdUrl =  req.getParameter("supplier_id");
+        Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
+        Integer supplierId = getIntegerFromUrlParam(productDataStore.getAll().size(), categoryIdUrl);
+
 //        context.setVariables(params);
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
@@ -42,11 +43,11 @@ public class ProductController extends HttpServlet {
         engine.process("product/index.html", context, resp.getWriter());
     }
 
-    public int gettingProductCategoryFromUrl(ProductDao productCategoryDataStore, String categoryIdUrl) {
+    public int getIntegerFromUrlParam(int max, String categoryIdUrl) {
         Integer categoryId;
         try {
             categoryId = Integer.valueOf(categoryIdUrl);
-            if (categoryId > productCategoryDataStore.getAll().size() || categoryId < 0 ) {
+            if (categoryId > max || categoryId < 0 ) {
                 categoryId = 1;
             }
         }

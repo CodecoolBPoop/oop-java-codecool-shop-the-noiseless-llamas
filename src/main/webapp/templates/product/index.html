@@ -25,6 +25,8 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
+    <!--Filter javascript-->
+    <script src="/static/js/Filter.js" defer></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
@@ -37,11 +39,15 @@
 
 <div class="container">
     <div class="form-group">
-      <select class="form-control" id="category" onchange="location.href='/?category_id='+this.value;">
+      <select class="form-control" id="category">
           <option th:each="category : ${categories}"
                   th:text="${category.name}" th:value="${category.getId()}"
                   th:selected="${category.getId() == selector}" class="category_select">Category</option>
       </select>
+        <select class="form-control" id="supplier">
+            <option value="1" selected>Supplier1</option>
+            <option value="2">Supplier2</option>
+        </select>
     </div>
 
     <div id="products" class="row">
