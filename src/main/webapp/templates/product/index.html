@@ -35,8 +35,8 @@
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="card" th:each="cat,iterStat : ${category}">
+        <strong th:text="${cat.name}">Category Title</strong>
     </div>
 
     <div id="products" class="row">
@@ -52,7 +52,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success" th:href="'cart?id=' + ${prod.getId()}" >Add to cart</a>
                     </div>
                 </div>
             </div>
