@@ -29,14 +29,27 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="card" th:each="product : ${cart.getProductList()}">
-        <strong th:text="${product.name}">Product Name</strong>
-    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody th:each="prod : ${products}">
+        <tr th:if="${prod.quantityInCart > 0}">
+            <td th:text="${prod.name}"></td>
+            <td th:text="${prod.quantityInCart}"></td>
+            <td th:text="${prod.price}"></td>
+            <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
+        </tr>
+    </tbody>
 
 
 
-</div>
+</table>
 
 <div th:replace="footer.html :: copy"></div>
 

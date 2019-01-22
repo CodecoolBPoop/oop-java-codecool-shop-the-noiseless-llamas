@@ -15,9 +15,13 @@ public class ShoppingCart extends BaseModel {
         return productList;
     }
 
+
     public void addToCart(Product product) {
        productList.add(product);
-       numberOfItems ++;
+   }
+
+   public void incrementNumberOfItems(int number) {
+       this.numberOfItems = this.numberOfItems + number;
    }
 
    public void removeFromCart(Product product) {
