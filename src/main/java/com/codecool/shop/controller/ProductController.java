@@ -31,10 +31,20 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        String categoryIdUrl =  req.getParameter("category_id");
+        Integer categoryId;
+        if (categoryIdUrl != null) {
+            categoryId = Integer.valueOf(categoryIdUrl);
+            if (categoryId > productCategoryDataStore.getAll().size()) {
+                categoryId = 1;
+            }
+        } else {
+            categoryId = 1;
+        }
 //        context.setVariables(params);
         context.setVariable("recipient", "World");
-        context.setVariable("category", productCategoryDataStore.find(1));
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+        context.setVariable("category", productCategoryDataStore.find(categoryId));
+        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
         engine.process("product/index.html", context, resp.getWriter());
     }
 
