@@ -33,12 +33,13 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         String categoryIdUrl =  req.getParameter("category_id");
         Integer categoryId;
-        if (categoryIdUrl != null) {
+        try {
             categoryId = Integer.valueOf(categoryIdUrl);
-            if (categoryId > productCategoryDataStore.getAll().size()) {
+            if (categoryId > productCategoryDataStore.getAll().size() || categoryId < 0 ) {
                 categoryId = 1;
             }
-        } else {
+        }
+        catch (Exception e) {
             categoryId = 1;
         }
 //        context.setVariables(params);
