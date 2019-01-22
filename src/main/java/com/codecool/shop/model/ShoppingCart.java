@@ -11,7 +11,11 @@ public class ShoppingCart extends BaseModel {
        super(name, description);
    }
 
-   public void addToCart(Product product) {
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    public void addToCart(Product product) {
        productList.add(product);
        numberOfItems ++;
    }
