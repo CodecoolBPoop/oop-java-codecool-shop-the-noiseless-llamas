@@ -33,6 +33,7 @@
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
+    <a href="/shopping-cart" th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></a>
 </div>
 
 <div class="container">
