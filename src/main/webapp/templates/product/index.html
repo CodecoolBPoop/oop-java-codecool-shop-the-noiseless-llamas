@@ -38,12 +38,10 @@
 <div class="container">
     <div class="form-group">
       <select class="form-control" id="category" onchange="location.href='/?category_id='+this.value;">
-          <option disabled selected value>Select a category</option>
-          <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.getId()}" class="category_select">Category</option>
+          <option th:each="category : ${categories}"
+                  th:text="${category.name}" th:value="${category.getId()}"
+                  th:selected="${category.getId() == selector}" class="category_select">Category</option>
       </select>
-    </div>
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
     </div>
 
     <div id="products" class="row">
