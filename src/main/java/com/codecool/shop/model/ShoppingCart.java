@@ -19,6 +19,15 @@ public class ShoppingCart extends BaseModel {
        return contains;
    }
 
+   public void incrementQuantityById(int id) {
+       for (Product product: productList) {
+           if (product.getId() == id) {
+               product.incrementQuantityInCartBy(1);
+               numberOfItems++;
+           }
+       }
+   }
+
     public ArrayList<Product> getProductList() {
         return productList;
     }
@@ -26,19 +35,12 @@ public class ShoppingCart extends BaseModel {
 
     public void addToCart(Product product) {
        productList.add(product);
-   }
-
-   public void incrementNumberOfItems(int number) {
-       this.numberOfItems = this.numberOfItems + number;
+       product.incrementQuantityInCartBy(1);
+       numberOfItems++;
    }
 
    public void removeFromCart(Product product) {
        productList.remove(product);
-   }
-
-   public void addToCartById(int id){
-
-
    }
 
     public int getNumberOfItems() {
