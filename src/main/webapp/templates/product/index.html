@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Codecool Shop</title>
+    <title>Shopping Cart</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -26,17 +26,19 @@
     <!-- End of Bootstrap components -->
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+
 </head>
 
 <body>
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
+    <a href="/shopping-cart" th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></a>
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="card" th:each="cat,iterStat : ${category}">
+        <strong th:text="${cat.name}">Category Title</strong>
     </div>
 
     <div id="products" class="row">
@@ -52,7 +54,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success" th:href="'cart?id=' + ${prod.getId()}" >Add to cart</a>
                     </div>
                 </div>
             </div>
