@@ -11,6 +11,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ShoppingCart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -45,7 +46,10 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HashMap<String, String> orderDetails = new HashMap<>();
-        int totalPrice = 0;
+        ShoppingCart cart = shoppingCartsDataStore.find(1);
+        ArrayList<Product> orderedItems = cart.getProductList();
+        float totalPrice = cart.getTotal();
+        String paymentType = request.getParameter("paymentType");
         orderDetails.put("firstName", request.getParameter("firstName"));
         orderDetails.put("lastName", request.getParameter("lastName"));
         orderDetails.put("email", request.getParameter("email"));
@@ -53,9 +57,9 @@ public class CheckoutController extends HttpServlet {
         orderDetails.put("state", request.getParameter("state"));
         orderDetails.put("zip", request.getParameter("zip"));
         orderDetails.put("address", request.getParameter("address"));
-        Order newOrder = new Order(orderDetails, totalPrice, request.getParameter("paymentType"));
-        orderDataStore.add(newOrder);
 
+        Order newOrder = new Order(orderDetails, totalPrice, paymentType, orderedItems);
+        orderDataStore.add(newOrder);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());

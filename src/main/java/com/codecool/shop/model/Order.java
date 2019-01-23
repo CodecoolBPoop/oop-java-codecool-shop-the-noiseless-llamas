@@ -11,8 +11,9 @@ public class Order extends BaseModel {
     private float totalPrice;
     private boolean paid;
 
-    public Order(HashMap<String, String> orderDetails, float totalPrice, String paymentType) {
+    public Order(HashMap<String, String> orderDetails, float totalPrice, String paymentType, ArrayList<Product> orderedItems) {
         super();
+        this.orderedItems = orderedItems;
         this.paymentType = paymentType;
         this.orderDetails = orderDetails;
         this.totalPrice = totalPrice;

@@ -47,4 +47,8 @@ public class ShoppingCart extends BaseModel {
            total += product.getSubtotal();
        } return total;
     }
+
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
 }
