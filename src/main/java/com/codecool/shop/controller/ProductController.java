@@ -32,7 +32,7 @@ public class ProductController extends HttpServlet {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
 
-        String productId = req.getParameter("id");
+        String productId = req.getParameter("cart_id");
         if (isValidProductId(productDataStore, productId)) {
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
             ShoppingCart cart = shoppingCartsDataStore.find(1);
