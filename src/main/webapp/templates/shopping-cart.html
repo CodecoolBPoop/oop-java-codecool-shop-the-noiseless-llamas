@@ -46,6 +46,15 @@
             <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
     </tbody>
+    <tbody>
+        <tr>
+            <td><b> Total Price: </b></td>
+            <td></td>
+            <td></td>
+            <b><td th:text="${cart.getTotal()} + ' ' + ${currency}"></b></td>
+
+        </tr>
+    </tbody>
 
 
 
