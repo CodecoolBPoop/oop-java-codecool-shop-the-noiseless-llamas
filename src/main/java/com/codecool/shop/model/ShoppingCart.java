@@ -26,9 +26,6 @@ public class ShoppingCart extends BaseModel {
        }
    }
 
-    public ArrayList<Product> getProductList() {
-        return productList;
-    }
 
 
     public void addToCart(Product product) {
@@ -36,9 +33,6 @@ public class ShoppingCart extends BaseModel {
        product.incrementQuantityInCartBy(1);
    }
 
-   public void removeFromCart(Product product) {
-       productList.remove(product);
-   }
 
     public int getNumberOfItems() {
        int numberOfItems = 0;

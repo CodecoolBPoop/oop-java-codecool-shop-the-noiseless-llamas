@@ -39,13 +39,8 @@ public class ProductController extends HttpServlet {
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
 
-           // productToAdd.incrementQuantityInCartBy(1);
-            //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
             System.out.println(productDataStore.getAll().toString());
         }
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -54,7 +49,6 @@ public class ProductController extends HttpServlet {
         Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
         Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
 
-//        context.setVariables(params);
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.find(categoryId));
