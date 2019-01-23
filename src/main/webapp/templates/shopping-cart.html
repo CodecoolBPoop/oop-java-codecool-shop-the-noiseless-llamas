@@ -45,14 +45,23 @@
             <td th:text="${prod.price}"></td>
             <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
+
     </tbody>
     <tbody>
+    <tr><td> </td></tr>
         <tr>
             <td><b> Total Price: </b></td>
             <td></td>
             <td></td>
             <b><td th:text="${cart.getTotal()} + ' ' + ${currency}"></b></td>
         </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td> <a href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
+
+    </tr>
     </tbody>
 
 

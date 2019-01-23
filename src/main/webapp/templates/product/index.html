@@ -35,7 +35,7 @@
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
-    <a href="/shopping-cart" th:text="${cart_size} + ' item(s) in the cart'"></a>
+    <a class="btn btn-success cart_button" href="/shopping-cart" th:text="${cart_size} + ' item(s) in the cart'"></a>
 </div>
 
 <div class="container">
@@ -61,8 +61,8 @@
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
+        <div class="col col-sm-12 col-md-6 col-lg-4 mb-4" th:each="prod,iterStat : ${products}">
+            <div class="card h-100">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
