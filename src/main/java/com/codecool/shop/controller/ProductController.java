@@ -2,9 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -22,6 +24,7 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -32,29 +35,31 @@ public class ProductController extends HttpServlet {
         String categoryIdUrl =  req.getParameter("category_id");
         String supplierIdUrl =  req.getParameter("supplier_id");
         Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
-        Integer supplierId = getIntegerFromUrlParam(productDataStore.getAll().size(), categoryIdUrl);
+        Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
 
 //        context.setVariables(params);
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.find(categoryId));
-        context.setVariable("selector", categoryId);
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
+        context.setVariable("category_selector", categoryId);
+        context.setVariable("suppliers", supplierDataStore.getAll());
+        context.setVariable("supplier_selector", supplierId);
+        context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
         engine.process("product/index.html", context, resp.getWriter());
     }
 
-    public int getIntegerFromUrlParam(int max, String categoryIdUrl) {
-        Integer categoryId;
+    public int getIntegerFromUrlParam(int max, String urlId) {
+        Integer id;
         try {
-            categoryId = Integer.valueOf(categoryIdUrl);
-            if (categoryId > max || categoryId < 0 ) {
-                categoryId = 1;
+            id = Integer.valueOf(urlId);
+            if (id > max || id < 0 ) {
+                id = 1;
             }
         }
         catch (Exception e) {
-            categoryId = 1;
+            id = 1;
         }
-        return categoryId;
+        return id;
     }
 
 }

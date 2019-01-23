@@ -39,15 +39,24 @@
 
 <div class="container">
     <div class="form-group">
-      <select class="form-control" id="category">
-          <option th:each="category : ${categories}"
-                  th:text="${category.name}" th:value="${category.getId()}"
-                  th:selected="${category.getId() == selector}" class="category_select">Category</option>
-      </select>
-        <select class="form-control" id="supplier">
-            <option value="1" selected>Supplier1</option>
-            <option value="2">Supplier2</option>
-        </select>
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="category">Select a category:</label>
+                <select class="form-control" id="category">
+                    <option th:each="category : ${categories}"
+                          th:text="${category.name}" th:value="${category.getId()}"
+                          th:selected="${category.getId() == category_selector}" class="category_select">Category</option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <label for="supplier">Select a supplier:</label>
+                <select class="form-control" id="supplier">
+                    <option th:each="supplier : ${suppliers}"
+                          th:text="${supplier.name}" th:value="${supplier.getId()}"
+                          th:selected="${supplier.getId() == supplier_selector}" class="supplier_select">Supplier</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <div id="products" class="row">
