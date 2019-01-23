@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class ShoppingCart extends BaseModel {
     private ArrayList<Product> productList = new ArrayList<>();
-    private int numberOfItems;
 
 
    public ShoppingCart(String name, String description) {
@@ -23,7 +22,6 @@ public class ShoppingCart extends BaseModel {
        for (Product product: productList) {
            if (product.getId() == id) {
                product.incrementQuantityInCartBy(1);
-               numberOfItems++;
            }
        }
    }
@@ -36,7 +34,6 @@ public class ShoppingCart extends BaseModel {
     public void addToCart(Product product) {
        productList.add(product);
        product.incrementQuantityInCartBy(1);
-       numberOfItems++;
    }
 
    public void removeFromCart(Product product) {
@@ -44,6 +41,9 @@ public class ShoppingCart extends BaseModel {
    }
 
     public int getNumberOfItems() {
-        return numberOfItems;
+       int numberOfItems = 0;
+       for (Product product: productList) {
+           numberOfItems = numberOfItems + product.getQuantityInCart();
+       } return numberOfItems;
     }
 }
