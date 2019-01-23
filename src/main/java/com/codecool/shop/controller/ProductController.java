@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/","/cart"})
+@WebServlet(urlPatterns = {"/", "/cart"})
 
 public class ProductController extends HttpServlet {
 
@@ -32,17 +32,28 @@ public class ProductController extends HttpServlet {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
 
+
         String productId = req.getParameter("id");
         if (isValidProductId(productDataStore, productId)) {
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
             ShoppingCart cart = shoppingCartsDataStore.find(1);
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
+        }
+/*
+         String decrementId = req.getParameter("decrementId");
+         if (isValidProductId(productDataStore,productId)){
+             Product productToDecrement = productDataStore.find(Integer.valueOf(productId));
+             ShoppingCart cart = shoppingCartsDataStore.find(1);
+             if (cart.contains(productToDecrement)) cart.decrementQuantityById(Integer.valueOf(decrementId));
+             else  cart.removeFromCart(productToDecrement);
+         }*/
+
 
            // productToAdd.incrementQuantityInCartBy(1);
             //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
             System.out.println(productDataStore.getAll().toString());
-        }
+
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
@@ -65,6 +76,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("cart", shoppingCartsDataStore.find(1));
         engine.process("product/index.html", context, resp.getWriter());
     }
+
 
     public int getIntegerFromUrlParam(int max, String urlId) {
         Integer id;

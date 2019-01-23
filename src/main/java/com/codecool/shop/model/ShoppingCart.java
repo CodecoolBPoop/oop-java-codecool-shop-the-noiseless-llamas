@@ -28,6 +28,15 @@ public class ShoppingCart extends BaseModel {
        }
    }
 
+   public void decrementQuantityById(int id){
+       for (Product product: productList){
+           if (product.getId() == id){
+               product.decrementQuantityInCartBy(1);
+               numberOfItems--;
+           }
+       }
+   }
+
     public ArrayList<Product> getProductList() {
         return productList;
     }

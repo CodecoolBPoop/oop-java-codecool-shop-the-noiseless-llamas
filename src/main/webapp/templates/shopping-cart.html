@@ -33,7 +33,9 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th> </th>
             <th>Quantity</th>
+            <th> </th>
             <th>Unit Price</th>
             <th>Subtotal</th>
         </tr>
@@ -41,7 +43,16 @@
     <tbody th:each="prod : ${products}">
         <tr th:if="${prod.quantityInCart > 0}">
             <td th:text="${prod.name}"></td>
+
+           <td> <div class="card-text">
+                <a class="btn btn-success" th:href="'cart?id=' + ${prod.getId()}" >+</a>
+            </div></td>
+
             <td th:text="${prod.quantityInCart}"></td>
+
+            <td><div class="card-text">
+                <a class="btn btn-success" th:href="'cart?id=' + ${prod.getId()}" >-</a>
+            </div></td>
             <td th:text="${prod.price}"></td>
             <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
