@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Shopping Cart</title>
+    <title>Codecool Shop</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -25,8 +25,10 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <!--Filter javascript-->
+    <script src="/static/js/Filter.js" defer></script>
 
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
@@ -37,8 +39,25 @@
 </div>
 
 <div class="container">
-    <div class="card" th:each="cat,iterStat : ${category}">
-        <strong th:text="${cat.name}">Category Title</strong>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="category">Select a category:</label>
+                <select class="form-control" id="category">
+                    <option th:each="category : ${categories}"
+                          th:text="${category.name}" th:value="${category.getId()}"
+                          th:selected="${category.getId() == category_selector}" class="category_select">Category</option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <label for="supplier">Select a supplier:</label>
+                <select class="form-control" id="supplier">
+                    <option th:each="supplier : ${suppliers}"
+                          th:text="${supplier.name}" th:value="${supplier.getId()}"
+                          th:selected="${supplier.getId() == supplier_selector}" class="supplier_select">Supplier</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <div id="products" class="row">
