@@ -19,4 +19,8 @@ public class Order extends BaseModel {
         this.totalPrice = totalPrice;
         this.paid = false;
     }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
 }

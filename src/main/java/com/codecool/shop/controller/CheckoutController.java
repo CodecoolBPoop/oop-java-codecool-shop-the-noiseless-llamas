@@ -65,8 +65,9 @@ public class CheckoutController extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
         context.setVariable("cart", shoppingCartsDataStore.find(1));
         context.setVariable("currency", productDataStore.getAll().get(0).getDefaultCurrency());
+        context.setVariable("order", newOrder);
 
-        engine.process("checkout.html", context, response.getWriter());
+        engine.process("payment.html", context, response.getWriter());
 
     }
 }

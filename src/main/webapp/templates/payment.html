@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class = "container">
-    <form class="form-horizontal" role="form" th:if="${order.paymentType == 'card'}">
+    <form class="form-horizontal" role="form" th:if="${order.getPaymentType() == 'card'}">
     <fieldset>
         <legend>Payment with credit card</legend>
         <div class="form-group">
@@ -93,7 +93,7 @@
         </div>
     </fieldset>
     </form>
-    <form class="form-horizontal" role="form" th:if="${order.paymentType == 'paypal'}">
+    <form class="form-horizontal" role="form" th:if="${order.getPaymentType() == 'paypal'}">
 </div>
 </body>
 </html>
