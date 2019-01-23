@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Pay</button>
+        <button class="btn btn-primary" type="submit" th:text="${cart.getTotal()} + ' ' + ${currency}">Pay</button>
     </form>
 </div>
 <div th:replace="footer.html :: copy"></div>
