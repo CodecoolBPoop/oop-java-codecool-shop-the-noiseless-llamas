@@ -21,9 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/", "/cart"})
+@WebServlet(urlPatterns = {"/", "cart", "cartDecrement"})
 
 public class ProductController extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,26 +32,36 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
-
+        StringBuffer currentUrl = req.getRequestURL();
+        //currentUrl.delete(0, 14);
+        System.out.println(currentUrl);
 
         String productId = req.getParameter("id");
         if (isValidProductId(productDataStore, productId)) {
+            System.out.println("DOntWORK");
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
             ShoppingCart cart = shoppingCartsDataStore.find(1);
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
         }
-/*
-         String decrementId = req.getParameter("decrementId");
-         if (isValidProductId(productDataStore,productId)){
-             Product productToDecrement = productDataStore.find(Integer.valueOf(productId));
-             ShoppingCart cart = shoppingCartsDataStore.find(1);
-             if (cart.contains(productToDecrement)) cart.decrementQuantityById(Integer.valueOf(decrementId));
-             else  cart.removeFromCart(productToDecrement);
-         }*/
+
+        if (currentUrl.toString().contains("Decrement")){
+            System.out.println("anyád");
+            String decrementId = req.getParameter("decrement");
+            System.out.println(decrementId + "asdd");
+            if (isValidProductId(productDataStore, decrementId)) {
+                System.out.println("Anyád2");
+                Product productToDecrement = productDataStore.find(Integer.valueOf(decrementId));
+                ShoppingCart cart = shoppingCartsDataStore.find(1);
+                if (cart.contains(productToDecrement)) cart.decrementQuantityById(Integer.valueOf(decrementId));
+
+                else cart.removeFromCart(productToDecrement);
+                System.out.println("Anyád3");
+            }
+        }
 
 
-           // productToAdd.incrementQuantityInCartBy(1);
+        // productToAdd.incrementQuantityInCartBy(1);
             //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
             System.out.println(productDataStore.getAll().toString());
 
@@ -98,6 +109,7 @@ public class ProductController extends HttpServlet {
             int intId = Integer.valueOf(id);
             for (Product product: dao.getAll()) {
                 if (product.getId() == intId) valid = true;
+                System.out.println("OOOOKAAAYY");
             }
         } catch (Exception e) {
             System.out.println("nope");
