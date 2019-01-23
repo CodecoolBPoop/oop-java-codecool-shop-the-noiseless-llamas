@@ -68,12 +68,20 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                 <label class="form-check-label" for="invalidCheck2">
-                    <a href="https://codecool.com/privacy-agreement/" target="_blank"> Agree to terms and conditions</a>
+                    <a> Agree to terms and conditions</a>
+                    <a href="https://codecool.com/privacy-agreement/" target="_blank"> (view here)</a>
                 </label>
             </div>
         </div>
-
-        <button class="btn btn-primary" type="submit" th:text="${cart.getTotal()} + ' ' + ${currency}">Pay</button>
+        <div class="form-row">
+            <div class="col-md-6">
+                <button class="btn btn-primary" type="submit">Pay</button>
+            </div>
+            <div class="col-md-6">
+                <span class="font-weight-bold">Total price: </span>
+                <span th:text="${cart.getTotal()} + ' ' + ${currency}"></span>
+            </div>
+        </div>
     </form>
 </div>
 <div th:replace="footer.html :: copy"></div>

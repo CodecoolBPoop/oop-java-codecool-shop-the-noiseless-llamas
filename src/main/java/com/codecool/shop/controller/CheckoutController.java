@@ -33,6 +33,7 @@ public class CheckoutController extends HttpServlet {
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
+        context.setVariable("currency", productDataStore.getAll().get(0).getDefaultCurrency());
         engine.process("checkout.html", context, response.getWriter());
     }
 }
