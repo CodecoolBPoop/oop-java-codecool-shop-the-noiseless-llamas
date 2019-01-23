@@ -7,7 +7,6 @@ public class Order extends BaseModel {
     private ArrayList<Product> orderedItems;
     private ArrayList<String> orderDetails;
     private float totalPrice;
-    private int orderId;
     private static int counter = 0;
     private boolean paid;
 
@@ -15,7 +14,6 @@ public class Order extends BaseModel {
         super(name);
         this.orderDetails = orderDetails;
         this.totalPrice = totalPrice;
-        this.id = ++counter;
         this.paid = false;
     }
 }
