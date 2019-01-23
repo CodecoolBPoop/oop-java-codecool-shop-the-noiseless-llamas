@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ShoppingCart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -39,6 +40,8 @@ public class ShoppingCartController extends HttpServlet {
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
+        context.setVariable("currency", productDataStore.getAll().get(0).getDefaultCurrency()); //get's the currency of the first item in the cart and sets it as currency of the cart
         engine.process("shopping-cart.html", context, response.getWriter());
+
     }
 }
