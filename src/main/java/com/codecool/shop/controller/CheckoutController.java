@@ -35,7 +35,6 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
         context.setVariable("cart", shoppingCartsDataStore.find(1));
@@ -45,6 +44,7 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         HashMap<String, String> orderDetails = new HashMap<>();
         ShoppingCart cart = shoppingCartsDataStore.find(1);
         ArrayList<Product> orderedItems = cart.getProductList();
