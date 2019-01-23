@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/","/cart"})
+@WebServlet(urlPatterns = {"/"})
 
 public class ProductController extends HttpServlet {
 
@@ -41,7 +41,6 @@ public class ProductController extends HttpServlet {
 
            // productToAdd.incrementQuantityInCartBy(1);
             //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
-            System.out.println(productDataStore.getAll().toString());
         }
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -54,6 +53,7 @@ public class ProductController extends HttpServlet {
         Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
         Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
 
+
 //        context.setVariables(params);
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
@@ -62,7 +62,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("supplier_selector", supplierId);
         context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
-        context.setVariable("cart", shoppingCartsDataStore.find(1));
+        context.setVariable("cart_size", shoppingCartsDataStore.find(1).getNumberOfItems());
         engine.process("product/index.html", context, resp.getWriter());
     }
 
