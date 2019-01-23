@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class ShoppingCart extends BaseModel {
     private ArrayList<Product> productList = new ArrayList<>();
+    private int numberOfItems;
+    private float total = 0;
 
 
    public ShoppingCart(String name, String description) {
@@ -45,5 +47,11 @@ public class ShoppingCart extends BaseModel {
        for (Product product: productList) {
            numberOfItems = numberOfItems + product.getQuantityInCart();
        } return numberOfItems;
+    }
+
+    public float getTotal() {
+       for (Product product: productList) {
+           this.total += (float) product.getSubtotal();}
+       return total;
     }
 }
