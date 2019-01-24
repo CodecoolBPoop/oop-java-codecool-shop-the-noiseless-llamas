@@ -54,14 +54,14 @@
                 <a class="btn btn-success" th:href="'/shopping-cart?decrement=' + ${prod.getId()}" >-</a>
             </div></td>
             <td th:text="${prod.price}"></td>
-            <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
+            <td th:text="${#numbers.formatDecimal(prod.getSubtotal(), 1, 2, 'POINT')} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
     </tbody>
 </table>
 
     <div class="container" th:if="${cart.getTotal()} != 0">
         <div class="row">
-            <div class="col" align="right" th:text="'Total Price: ' + ${cart.getTotal()} + ' ' + ${currency}"></div>
+            <div class="col" align="right" th:text="'Total Price: ' + ${#numbers.formatDecimal(cart.getTotal(), 1, 2, 'POINT')} + ' ' + ${currency}"></div>
             <div class="col" align="left"><a href="/checkout" class="btn btn-success cart_button" > Check Out </a></div>
         </div>
     </div>
