@@ -76,7 +76,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-4">
+            <div class="col-md-4" align="center">
                 <button class="btn btn-primary" type="submit">Pay with Credit Card</button>
             </div>
             <div id="paypal-button" class="col-md-4" align="center"></div>
@@ -121,7 +121,7 @@
                 }, '#paypal-button');
 
             </script>
-            <div class="col-md-4" align="right">
+            <div class="col-md-4" align="center">
                 <span class="font-weight-bold">Total price: </span>
                 <span th:text="${cart.getTotal()} + ' ' + ${currency}"></span>
             </div>
