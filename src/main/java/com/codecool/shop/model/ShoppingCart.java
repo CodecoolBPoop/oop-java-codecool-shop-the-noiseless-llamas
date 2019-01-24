@@ -23,7 +23,6 @@ public class ShoppingCart extends BaseModel {
        for (Product product: productList) {
            if (product.getId() == id) {
                product.incrementQuantityInCartBy(1);
-               numberOfItems++;
            }
        }
    }
@@ -45,14 +44,24 @@ public class ShoppingCart extends BaseModel {
     public void addToCart(Product product) {
        productList.add(product);
        product.incrementQuantityInCartBy(1);
-       numberOfItems++;
    }
 
-   public void removeFromCart(Product product) {
-       productList.remove(product);
-   }
 
     public int getNumberOfItems() {
-        return numberOfItems;
+       int numberOfItems = 0;
+       for (Product product: productList) {
+           numberOfItems = numberOfItems + product.getQuantityInCart();
+       } return numberOfItems;
+    }
+
+    public float getTotal() {
+       float total = 0;
+       for (Product product: productList) {
+           total += product.getSubtotal();
+       } return total;
+    }
+
+    public ArrayList<Product> getProductList() {
+        return productList;
     }
 }

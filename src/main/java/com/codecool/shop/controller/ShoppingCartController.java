@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.ShoppingCartDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ShoppingCart;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -28,17 +29,15 @@ public class ShoppingCartController extends HttpServlet {
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
 
 
-//        Map params = new HashMap<>();
-//        params.put("category", productCategoryDataStore.find(1));
-//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
-//        context.setVariables(params);
         context.setVariable("recipient", "World");
         context.setVariable("category", productCategoryDataStore.find(1));
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
+        context.setVariable("currency", productDataStore.getAll().get(0).getDefaultCurrency()); //get's the currency of the first item in the cart and sets it as currency of the cart
         engine.process("shopping-cart.html", context, response.getWriter());
+
     }
 }

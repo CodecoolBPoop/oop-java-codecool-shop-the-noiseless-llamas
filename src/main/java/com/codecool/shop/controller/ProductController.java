@@ -25,7 +25,6 @@ import java.io.IOException;
 
 public class ProductController extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = ProductDaoMem.getInstance();
@@ -35,6 +34,16 @@ public class ProductController extends HttpServlet {
         StringBuffer currentUrl = req.getRequestURL();
         //currentUrl.delete(0, 14);
         System.out.println(currentUrl);
+
+        String productId = req.getParameter("cart_id");
+        if (isValidProductId(productDataStore, productId)) {
+            Product productToAdd = productDataStore.find(Integer.valueOf(productId));
+            ShoppingCart cart = shoppingCartsDataStore.find(1);
+            if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
+            else cart.addToCart(productToAdd);
+
+            System.out.println(productDataStore.getAll().toString());
+        }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
