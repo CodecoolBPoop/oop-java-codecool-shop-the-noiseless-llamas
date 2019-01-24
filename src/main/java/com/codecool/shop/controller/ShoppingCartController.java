@@ -31,12 +31,12 @@ public class ShoppingCartController extends HttpServlet {
 
         String productId = request.getParameter("id");
         if (isValidProductId(productDataStore, productId)) {
+            System.out.println();
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
             ShoppingCart cart = shoppingCartsDataStore.find(1);
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
 
-            System.out.println(productDataStore.getAll().toString());
         }
 
         String decrementId = request.getParameter("decrement");
@@ -66,10 +66,8 @@ public class ShoppingCartController extends HttpServlet {
             int intId = Integer.valueOf(id);
             for (Product product: dao.getAll()) {
                 if (product.getId() == intId) valid = true;
-                System.out.println("OOOOKAAAYY");
             }
         } catch (Exception e) {
-            System.out.println("nope");
         }
         return valid;
     }
