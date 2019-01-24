@@ -41,7 +41,6 @@ public class ProductController extends HttpServlet {
 
            // productToAdd.incrementQuantityInCartBy(1);
             //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
-            System.out.println(productDataStore.getAll().toString());
         }
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
