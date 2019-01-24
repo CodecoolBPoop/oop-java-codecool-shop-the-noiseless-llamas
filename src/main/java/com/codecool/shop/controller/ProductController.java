@@ -36,6 +36,22 @@ public class ProductController extends HttpServlet {
         //currentUrl.delete(0, 14);
         System.out.println(currentUrl);
 
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        String categoryIdUrl =  req.getParameter("category_id");
+        String supplierIdUrl =  req.getParameter("supplier_id");
+        Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
+        Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
+        context.setVariable("recipient", "World");
+        context.setVariable("categories", productCategoryDataStore.getAll());
+        context.setVariable("category", productCategoryDataStore.find(categoryId));
+        context.setVariable("category_selector", categoryId);
+        context.setVariable("suppliers", supplierDataStore.getAll());
+        context.setVariable("supplier_selector", supplierId);
+        context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
+        context.setVariable("cart", shoppingCartsDataStore.find(1));
+
+
         String productId = req.getParameter("id");
         if (isValidProductId(productDataStore, productId)) {
             System.out.println("DOntWORK");
@@ -43,7 +59,10 @@ public class ProductController extends HttpServlet {
             ShoppingCart cart = shoppingCartsDataStore.find(1);
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
+            engine.process("shopping-cart.html",context, resp.getWriter());
+
         }
+
 
         if (currentUrl.toString().contains("Decrement")){
             System.out.println("anyád");
@@ -56,36 +75,26 @@ public class ProductController extends HttpServlet {
                 if (cart.contains(productToDecrement)) cart.decrementQuantityById(Integer.valueOf(decrementId));
 
                 else cart.removeFromCart(productToDecrement);
+                engine.process("shopping-cart.html",context, resp.getWriter());
                 System.out.println("Anyád3");
             }
         }
 
 
         // productToAdd.incrementQuantityInCartBy(1);
-            //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
-            System.out.println(productDataStore.getAll().toString());
+        //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
+        System.out.println(productDataStore.getAll().toString());
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
 
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        String categoryIdUrl =  req.getParameter("category_id");
-        String supplierIdUrl =  req.getParameter("supplier_id");
-        Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
-        Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
+
+        if (!currentUrl.toString().contains("Decrement")){
+            engine.process("product/index.html", context, resp.getWriter());
+        }
 
 //        context.setVariables(params);
-        context.setVariable("recipient", "World");
-        context.setVariable("categories", productCategoryDataStore.getAll());
-        context.setVariable("category", productCategoryDataStore.find(categoryId));
-        context.setVariable("category_selector", categoryId);
-        context.setVariable("suppliers", supplierDataStore.getAll());
-        context.setVariable("supplier_selector", supplierId);
-        context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
-        context.setVariable("cart", shoppingCartsDataStore.find(1));
-        engine.process("product/index.html", context, resp.getWriter());
     }
 
 
