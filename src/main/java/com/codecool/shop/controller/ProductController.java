@@ -42,7 +42,8 @@ public class ProductController extends HttpServlet {
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
 
-            System.out.println(productDataStore.getAll().toString());
+           // productToAdd.incrementQuantityInCartBy(1);
+            //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

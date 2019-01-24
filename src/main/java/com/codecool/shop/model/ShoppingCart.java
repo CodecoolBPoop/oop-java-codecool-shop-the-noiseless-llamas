@@ -65,4 +65,6 @@ public class ShoppingCart extends BaseModel {
     public ArrayList<Product> getProductList() {
         return productList;
     }
+
+
 }
