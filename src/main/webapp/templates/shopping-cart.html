@@ -58,7 +58,7 @@
         </tr>
 
     </tbody>
-    <tbody>
+    <tbody th:if="${cart.getTotal()} != 0">
     <tr><td> </td></tr>
         <tr>
             <td><b> Total Price: </b></td>
@@ -72,6 +72,13 @@
         <td></td>
         <td> <a href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
 
+    </tr>
+    </tbody>
+    <tbody th:if="${cart.getTotal()} == 0">
+    <tr>
+        <td>
+            Your shopping cart is empty.
+        </td>
     </tr>
     </tbody>
 
