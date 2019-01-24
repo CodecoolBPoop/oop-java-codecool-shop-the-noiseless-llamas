@@ -31,9 +31,6 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
-        StringBuffer currentUrl = req.getRequestURL();
-        //currentUrl.delete(0, 14);
-        System.out.println(currentUrl);
 
        String productId = req.getParameter("cart_id");
         if (isValidProductId(productDataStore, productId)) {
@@ -60,18 +57,10 @@ public class ProductController extends HttpServlet {
         context.setVariable("supplier_selector", supplierId);
         context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
-
-        System.out.println(productDataStore.getAll().toString());
-
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
 //        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-
-
-
         engine.process("product/index.html", context, resp.getWriter());
-
-
 //        context.setVariables(params);
     }
 
@@ -96,7 +85,6 @@ public class ProductController extends HttpServlet {
             int intId = Integer.valueOf(id);
             for (Product product: dao.getAll()) {
                 if (product.getId() == intId) valid = true;
-                System.out.println("OOOOKAAAYY");
             }
         } catch (Exception e) {
             System.out.println("nope");
