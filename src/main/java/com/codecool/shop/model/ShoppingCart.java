@@ -53,4 +53,6 @@ public class ShoppingCart extends BaseModel {
            this.total += (float) product.getSubtotal();}
        return total;
     }
+
+
 }

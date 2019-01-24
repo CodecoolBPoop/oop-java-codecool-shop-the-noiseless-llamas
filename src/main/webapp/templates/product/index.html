@@ -28,6 +28,9 @@
     <!--Filter javascript-->
     <script src="/static/js/Filter.js" defer></script>
 
+    <!--Font Awesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
@@ -35,8 +38,9 @@
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
-
-    <a class="btn btn-success cart_button" href="/shopping-cart" th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></a>
+    <a class="btn btn-success cart_button" href="/shopping-cart" >
+        <div th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></div>
+    </a>
 </div>
 
 <div class="container">
@@ -62,8 +66,8 @@
     </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
+        <div class="col col-sm-12 col-md-6 col-lg-4 mb-4" th:each="prod,iterStat : ${products}">
+            <div class="card h-100">
                 <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
@@ -75,7 +79,7 @@
                     </div>
                     <div class="card-text">
                         <a class="btn btn-success cart_button"
-                           th:attr="data-id=${prod.getId()}">Add to cart</a>
+                           th:attr="data-id=${prod.getId()}">Add to cart <i class="fas fa-cart-plus"></i></a>
                     </div>
                 </div>
             </div>
