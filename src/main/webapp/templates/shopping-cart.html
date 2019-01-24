@@ -70,7 +70,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td> <a href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
+        <td th:if="${cart.getTotal() > 0}"><a   href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
 
     </tr>
     </tbody>
