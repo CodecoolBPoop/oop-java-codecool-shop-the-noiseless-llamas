@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/","/cart"})
+@WebServlet(urlPatterns = {"/", "cart", "cartDecrement"})
 
 public class ProductController extends HttpServlet {
 
@@ -31,15 +31,19 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
+        StringBuffer currentUrl = req.getRequestURL();
+        //currentUrl.delete(0, 14);
+        System.out.println(currentUrl);
 
-        String productId = req.getParameter("cart_id");
+       String productId = req.getParameter("cart_id");
         if (isValidProductId(productDataStore, productId)) {
             Product productToAdd = productDataStore.find(Integer.valueOf(productId));
             ShoppingCart cart = shoppingCartsDataStore.find(1);
             if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
             else cart.addToCart(productToAdd);
 
-            System.out.println(productDataStore.getAll().toString());
+           // productToAdd.incrementQuantityInCartBy(1);
+            //shoppingCartsDataStore.find(1).incrementNumberOfItems(1);
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -48,7 +52,6 @@ public class ProductController extends HttpServlet {
         String supplierIdUrl =  req.getParameter("supplier_id");
         Integer categoryId = getIntegerFromUrlParam(productCategoryDataStore.getAll().size(), categoryIdUrl);
         Integer supplierId = getIntegerFromUrlParam(supplierDataStore.getAll().size(), supplierIdUrl);
-
         context.setVariable("recipient", "World");
         context.setVariable("categories", productCategoryDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.find(categoryId));
@@ -57,8 +60,21 @@ public class ProductController extends HttpServlet {
         context.setVariable("supplier_selector", supplierId);
         context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
+
+        System.out.println(productDataStore.getAll().toString());
+
+//        Map params = new HashMap<>();
+//        params.put("category", productCategoryDataStore.find(1));
+//        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+
+
+
         engine.process("product/index.html", context, resp.getWriter());
+
+
+//        context.setVariables(params);
     }
+
 
     public int getIntegerFromUrlParam(int max, String urlId) {
         Integer id;
@@ -80,6 +96,7 @@ public class ProductController extends HttpServlet {
             int intId = Integer.valueOf(id);
             for (Product product: dao.getAll()) {
                 if (product.getId() == intId) valid = true;
+                System.out.println("OOOOKAAAYY");
             }
         } catch (Exception e) {
             System.out.println("nope");
