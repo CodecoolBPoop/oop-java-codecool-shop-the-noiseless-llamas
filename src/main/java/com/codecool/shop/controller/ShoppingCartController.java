@@ -29,6 +29,25 @@ public class ShoppingCartController extends HttpServlet {
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
 
 
+        String productId = request.getParameter("id");
+        if (isValidProductId(productDataStore, productId)) {
+            Product productToAdd = productDataStore.find(Integer.valueOf(productId));
+            ShoppingCart cart = shoppingCartsDataStore.find(1);
+            if (cart.contains(productToAdd)) cart.incrementQuantityById(Integer.valueOf(productId));
+            else cart.addToCart(productToAdd);
+
+            System.out.println(productDataStore.getAll().toString());
+        }
+
+        String decrementId = request.getParameter("decrement");
+        if (isValidProductId(productDataStore, decrementId)) {
+            Product productToDecrement = productDataStore.find(Integer.valueOf(decrementId));
+            ShoppingCart cart = shoppingCartsDataStore.find(1);
+            if (cart.contains(productToDecrement)) cart.decrementQuantityById(Integer.valueOf(decrementId));
+            else cart.removeFromCart(productToDecrement);
+        }
+
+
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
@@ -39,5 +58,19 @@ public class ShoppingCartController extends HttpServlet {
         context.setVariable("currency", productDataStore.getAll().get(0).getDefaultCurrency()); //get's the currency of the first item in the cart and sets it as currency of the cart
         engine.process("shopping-cart.html", context, response.getWriter());
 
+    }
+
+    private static boolean isValidProductId(ProductDao dao, String id) {
+        boolean valid = false;
+        try {
+            int intId = Integer.valueOf(id);
+            for (Product product: dao.getAll()) {
+                if (product.getId() == intId) valid = true;
+                System.out.println("OOOOKAAAYY");
+            }
+        } catch (Exception e) {
+            System.out.println("nope");
+        }
+        return valid;
     }
 }

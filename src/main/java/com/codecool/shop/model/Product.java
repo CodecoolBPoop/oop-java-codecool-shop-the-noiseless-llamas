@@ -46,6 +46,10 @@ public class Product extends BaseModel {
         this.quantityInCart = this.quantityInCart + quantityInCart;
     }
 
+    public void decrementQuantityInCartBy(int quantityInCart) {
+        this.quantityInCart = this.quantityInCart - quantityInCart;
+    }
+
     public String getPrice() {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
