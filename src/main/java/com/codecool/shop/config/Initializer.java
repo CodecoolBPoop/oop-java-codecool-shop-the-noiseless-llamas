@@ -70,7 +70,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("OOP", 999999999, "USD", "Object-oriented programming (OOP) is a programming paradigm based on the concept of \"objects\", which may contain data, in the form of fields, often known as attributes; and code, in the form of procedures, often known as methods", hardSkill,mentors));
         productDataStore.add(new Product("Pa Practice", 100, "USD", "Practice or practise is the act of rehearsing a behavior over and over, or engaging in an activity again and again, for the purpose of improving or mastering it, as in the phrase \"practise makes perfect\".", consultation,mentors));
         productDataStore.add(new Product("Spirit Lifting", 0, "USD", "http://inspirobot.me", consultation,mentors));
-        productDataStore.add(new Product("Lean Poker", 200, "USD", "We don't know, 'cause it's got postponed :(", workshop,mentors));
+        productDataStore.add(new Product("Lean Poker", 200, "USD", "We don't know, 'cause it got postponed :(", workshop,mentors));
         productDataStore.add(new Product("Active Listening", 10, "USD", "I wasn't paying attention", workshop,mentors));
 
 
