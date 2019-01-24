@@ -54,30 +54,20 @@
                 <a class="btn btn-success" th:href="'/shopping-cart?decrement=' + ${prod.getId()}" >-</a>
             </div></td>
             <td th:text="${prod.price}"></td>
-            <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
+            <td th:text="${#numbers.formatDecimal(prod.getSubtotal(), 1, 2, 'POINT')} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
-
     </tbody>
-    <tbody>
-    <tr><td> </td></tr>
-        <tr>
-            <td><b> Total Price: </b></td>
-            <td></td>
-            <td></td>
-            <b><td th:text="${cart.getTotal()} + ' ' + ${currency}"></b></td>
-        </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td th:if="${cart.getTotal() > 0}"><a   href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
-
-    </tr>
-    </tbody>
-
-
-
 </table>
+
+    <div class="container" th:if="${cart.getTotal()} != 0">
+        <div class="row">
+            <div class="col" align="right" th:text="'Total Price: ' + ${#numbers.formatDecimal(cart.getTotal(), 1, 2, 'POINT')} + ' ' + ${currency}"></div>
+            <div class="col" align="left"><a href="/checkout" class="btn btn-success cart_button" > Check Out </a></div>
+        </div>
+    </div>
+    <h1 class="container" align="center" th:if="${cart.getTotal()} == 0">
+        Your shopping cart is empty.
+    </h1>
 
 <div th:replace="footer.html :: copy"></div>
 
