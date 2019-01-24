@@ -36,14 +36,15 @@ public class ShoppingCart extends BaseModel {
        }
    }
 
-    public ArrayList<Product> getProductList() {
-        return productList;
-    }
-
 
     public void addToCart(Product product) {
        productList.add(product);
        product.incrementQuantityInCartBy(1);
+   }
+
+   public void removeFromCart(Product product){
+       productList.remove(product);
+       product.decrementQuantityInCartBy(1);
    }
 
 

@@ -45,13 +45,13 @@
             <td th:text="${prod.name}"></td>
 
            <td> <div class="card-text">
-                <a class="btn btn-success" th:href="'cart?id=' + ${prod.getId()}" >+</a>
+                <a class="btn btn-success" th:href="'/shopping-cart?id=' + ${prod.getId()}" >+</a>
             </div></td>
 
             <td th:text="${prod.quantityInCart}"></td>
 
             <td><div class="card-text">
-                <a class="btn btn-success" th:href="'cartDecrement?decrement=' + ${prod.getId()}" >-</a>
+                <a class="btn btn-success" th:href="'/shopping-cart?decrement=' + ${prod.getId()}" >-</a>
             </div></td>
             <td th:text="${prod.price}"></td>
             <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
