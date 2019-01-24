@@ -56,35 +56,18 @@
             <td th:text="${prod.price}"></td>
             <td th:text="${prod.getSubtotal()} + ' ' + ${prod.defaultCurrency}"></td>
         </tr>
-
     </tbody>
-    <tbody th:if="${cart.getTotal()} != 0">
-    <tr><td> </td></tr>
-        <tr>
-            <td><b> Total Price: </b></td>
-            <td></td>
-            <td></td>
-            <b><td th:text="${cart.getTotal()} + ' ' + ${currency}"></b></td>
-        </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td> <a href="/checkout" class="btn btn-success cart_button" > Check Out </a>  </td>
-
-    </tr>
-    </tbody>
-    <tbody th:if="${cart.getTotal()} == 0">
-    <tr>
-        <td>
-           <p>Your shopping cart is empty.</p>
-        </td>
-    </tr>
-    </tbody>
-
-
-
 </table>
+
+    <div class="container" th:if="${cart.getTotal()} != 0">
+        <div class="row">
+            <div class="col" align="right" th:text="'Total Price: ' + ${cart.getTotal()} + ' ' + ${currency}"></div>
+            <div class="col" align="left"><a href="/checkout" class="btn btn-success cart_button" > Check Out </a></div>
+        </div>
+    </div>
+    <h1 class="container" align="center" th:if="${cart.getTotal()} == 0">
+        Your shopping cart is empty.
+    </h1>
 
 <div th:replace="footer.html :: copy"></div>
 

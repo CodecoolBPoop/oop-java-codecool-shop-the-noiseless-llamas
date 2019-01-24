@@ -47,8 +47,6 @@ public class ShoppingCartController extends HttpServlet {
             else cart.removeFromCart(productToDecrement);
         }
 
-
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
         context.setVariable("recipient", "World");
