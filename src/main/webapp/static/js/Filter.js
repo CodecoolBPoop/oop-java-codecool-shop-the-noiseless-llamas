@@ -15,5 +15,8 @@ window.addEventListener('load', function(){
             window.location = filterString + '&cart_id=' + event.target.dataset.id;
         })
     }
-    window.history.replaceState({}, document.title, "/" + '?category_id=' + category.value + '&supplier_id=' + supplier.value);
+    if (window.location.href.indexOf('&cart_id=') > -1) {
+        window.history.replaceState({}, document.title, "/" + '?category_id=' + category.value + '&supplier_id=' + supplier.value);
+    }
+
 }, false);
