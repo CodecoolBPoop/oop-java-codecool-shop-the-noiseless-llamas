@@ -94,7 +94,6 @@ public class ProductController extends HttpServlet {
                 System.out.println("OOOOKAAAYY");
             }
         } catch (Exception e) {
-            System.out.println("nope");
         }
         return valid;
     }
