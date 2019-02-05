@@ -15,6 +15,7 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP DATABASE postgres;
 --
 -- Name: postgres; Type: DATABASE; Schema: -; Owner: postgres
 --
@@ -103,7 +104,9 @@ CREATE TABLE public.product (
     name character varying(30) NOT NULL,
     description character varying(300),
     price integer,
-    currency character varying(10)
+    currency character varying(10),
+    supplier character varying(30) NOT NULL,
+    product_category character varying(30) NOT NULL
 );
 
 
@@ -224,7 +227,13 @@ COPY public."order" (orderid) FROM stdin;
 -- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.product (productid, name, description, price, currency) FROM stdin;
+COPY public.product (productid, name, description, price, currency, supplier, product_category) FROM stdin;
+1	Amazon Fire	Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support	50	USD	Amazon	Tablet
+2	Lenovo IdeaPad Miix 700	Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.	479	USD	Lenovo	Tablet
+4	Lenovo 8	Lenovo's latest smartphone	80	USD	Lenovo	Phone
+5	Amazon Fire HD 8	Amazon's latest Fire HD 8 tablet is a great value for media consumption	89	USD	Amazon	Tablet
+8	Feedback	Information about reactions to a product, a person's performance of a task, etc. which is used as a basis for improvement.	15	USD	Mentors	Soft Skill
+10	Feed-forward	Feedforward is a method of teaching and learning that illustrates	30	USD	Mentors	Soft Skill
 \.
 
 
@@ -233,6 +242,13 @@ COPY public.product (productid, name, description, price, currency) FROM stdin;
 --
 
 COPY public.product_category (name, department, description) FROM stdin;
+Tablet	Hardware	A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.
+Phone	Hardware	A mobile phone that has a touchscreen interface, Internet access, and an operating system capable of running downloaded apps.
+Workshop	Mentoring	A meeting at which a group of people engage in intensive discussion and activity on a particular subject or project.
+Consultation	Mentoring	A meeting with an expert, such as a medical doctor, in order to seek advice.
+Hardware	IT	Computer hardware includes the physical, tangible parts or components of a computer, such as the cabinet, central processing unit, monitor, keyboard, computer data storage, graphic card, sound card, s
+Hard Skill	Mentoring	Hard skills, also called technical skills, are any skills relating to a specific task or situation. It involves both understanding and proficiency in such specific activity that involves methods, proc
+Soft Skill	HR	Soft skills are a combination of people skills, social skills, communication skills, character or personality traits, attitudes, career attribute, social intelligence and emotional intelligence quotie
 \.
 
 
@@ -241,6 +257,9 @@ COPY public.product_category (name, department, description) FROM stdin;
 --
 
 COPY public.supplier (name, description) FROM stdin;
+Amazon	Digital content and services
+Lenovo	Computers
+Mentors	Mentors rule
 \.
 
 
@@ -263,7 +282,7 @@ SELECT pg_catalog.setval('public.order_orderid_seq', 1, false);
 -- Name: table_name_productid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.table_name_productid_seq', 1, false);
+SELECT pg_catalog.setval('public.table_name_productid_seq', 10, true);
 
 
 --
@@ -349,19 +368,26 @@ CREATE UNIQUE INDEX user_id_uindex ON public."user" USING btree (id);
 
 
 --
--- Name: product product_category_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: product product_category; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.product
-    ADD CONSTRAINT product_category_fk FOREIGN KEY (name) REFERENCES public.product_category(name) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT product_category FOREIGN KEY (product_category) REFERENCES public.product_category(name) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
--- Name: product supplier_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: product supplier; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.product
-    ADD CONSTRAINT supplier_fk FOREIGN KEY (name) REFERENCES public.supplier(name) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT supplier FOREIGN KEY (supplier) REFERENCES public.supplier(name) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
