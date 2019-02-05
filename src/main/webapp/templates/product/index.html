@@ -25,6 +25,9 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
 
+    <!--Filter javascript-->
+    <script src="/static/js/Filter.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
@@ -32,11 +35,30 @@
 
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
+
+    <a class="btn btn-success cart_button" href="/shopping-cart" th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></a>
 </div>
 
 <div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
+                <label for="category">Select a category:</label>
+                <select class="form-control" id="category">
+                    <option th:each="category : ${categories}"
+                          th:text="${category.name}" th:value="${category.getId()}"
+                          th:selected="${category.getId() == category_selector}" class="category_select">Category</option>
+                </select>
+            </div>
+            <div class="col-lg-6">
+                <label for="supplier">Select a supplier:</label>
+                <select class="form-control" id="supplier">
+                    <option th:each="supplier : ${suppliers}"
+                          th:text="${supplier.name}" th:value="${supplier.getId()}"
+                          th:selected="${supplier.getId() == supplier_selector}" class="supplier_select">Supplier</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <div id="products" class="row">
@@ -52,7 +74,8 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success cart_button"
+                           th:attr="data-id=${prod.getId()}">Add to cart</a>
                     </div>
                 </div>
             </div>
