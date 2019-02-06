@@ -24,26 +24,33 @@ public class ProductDaoJDBC implements ProductDao {
     @Override
     public Product find(int id) {
 
-//        String query = "SELECT * FROM product";
-//
-//        try (Connection connection = getConnection();
-//             Statement statement =connection.createStatement();
-//             ResultSet resultSet = statement.executeQuery(query);
-//        ){
-//            if (resultSet.next()){
-//                Todo result = new Todo(resultSet.getString("title"),
-//                        resultSet.getString("id"),
-//                        Status.valueOf(resultSet.getString("status")));
-//                return result;
-//            } else {
-//                return null;
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
+        String query = "SELECT * FROM product";
+
+        try (Connection connection = getConnection();
+             Statement statement =connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query);
+        ){
+            while (resultSet.next()){
+                    int productid = resultSet.getInt("productid");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    float price = resultSet.getInt("price");
+                    String currency = resultSet.getString("currency");
+                    String supplier = resultSet.getString("supplier");
+                    String product_category = resultSet.getString("product_category");
+                    // we have to create the supplier and product_category from the received String, and then add it to the Product constructor
+                    Product product = new Product(productid, name, price, currency, description, null, null);
+
+                return product;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
