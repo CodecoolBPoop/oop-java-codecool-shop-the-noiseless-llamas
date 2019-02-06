@@ -27,6 +27,7 @@ public abstract class GeneralDaoJDBC {
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
                 Supplier supplier = new Supplier(name, description);
+                supplier.setId(id);
 
                 return supplier;
             }
