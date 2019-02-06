@@ -59,17 +59,25 @@
     <fieldset>
     <div class="form-row mt-3">
     <label class="col-sm-3 control-label">Email address:  </label>
-    <div class="col-sm-3">
-    <input type="text" class="form-control" name="email" placeholder="E-mail" required>
-    </div>
 
-            <label class="col-sm-3 control-label">Password  </label>
-            <div class="col-sm-3">
-                <input type="password" class="form-control" name="password1" id="password" placeholder="Password" required>
-            </div>    <label class="col-sm-3 control-label">Repeat Password  </label>
-            <div class="col-sm-3">
-                <input type="password" class="form-control" name="password2" id="confirm_password" placeholder="Password" required>
-            </div>
+    <input type="text" class="form-control" name="email" placeholder="E-mail" required>
+
+        <label class="col-sm-3 control-label">Password  </label>
+            <input type="password" class="form-control" name="password1" id="password" placeholder="Password" required>
+        <p>Confirm Password:</p>
+            <input type="password" class="form-control" name="password2" id="password_confirm" placeholder="Password" required oninput="check(this)" />
+    </div>
+        <script language='javascript' type='text/javascript'>
+            function check(input) {
+                if (input.value != document.getElementById('password').value) {
+                    input.setCustomValidity('Password Must be Matching.');
+                } else {
+                    // input is valid -- reset the error message
+                    input.setCustomValidity('');
+                }
+            }
+        </script>
+        <br /><br />
 
         <button class="btn btn-primary" type="submit" id="submit">Register</button>
         </fieldset>

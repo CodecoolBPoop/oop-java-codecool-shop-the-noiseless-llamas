@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <a class="btn btn-success" href="/login" >Log in</a>
+    <a class="btn btn-success" href="/register" >Sign up</a>
 
     <title>Codecool Shop</title>
 
@@ -43,7 +45,7 @@
         }, false);
     </script>
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
@@ -53,8 +55,6 @@
     <a class="btn btn-success cart_button" href="/shopping-cart" >
         <div th:text="${cart.getNumberOfItems()} + ' item(s) in the cart'"></div>
     </a>
-    <a class="btn btn-success" href="/login" >Log in</a>
-    <a class="btn btn-success" href="/register" >Sign up</a>
 </div>
 
 <div class="container">
