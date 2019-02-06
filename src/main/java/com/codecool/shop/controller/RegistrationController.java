@@ -25,10 +25,10 @@ public class RegistrationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         GoogleMail sendEmail = new GoogleMail();
-
+        String password = "sa";
         String emailAddress = request.getParameter("email");
         EMAIL = emailAddress;
-        String password = request.getParameter("password1");
+        password = request.getParameter("password1");
         String passwordRepeat = request.getParameter("password2");
 
         System.out.println(emailAddress + " anyád");
@@ -36,9 +36,9 @@ public class RegistrationController extends HttpServlet {
         System.out.println(passwordRepeat + " anyád");
 
 
-    if (password.equals(passwordRepeat)){
-        sendEmail.main();
-        }
+
+        //sendEmail.main();
+
        /* if (password == passwordRepeat)      {
             sendEmail.sendFromGMail("codecoolshoptw5", "", emailAddressList, "CodecoolShop welcome message", "Welcome to Codecoolshop mofoo");
         }*/

@@ -1,17 +1,11 @@
 package com.codecool.shop.controller;
 
-import java.io.IOException;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 
-public class GoogleMail extends HttpServlet {
+public class GoogleMail {
 
     private static String USER_NAME = "codecoolshoptw5";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = "CodecoolShoptw5"; // GMail password
