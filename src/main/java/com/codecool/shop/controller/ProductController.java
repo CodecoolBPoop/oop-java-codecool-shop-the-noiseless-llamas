@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 @WebServlet(urlPatterns = {"/", "cart", "cartDecrement"})
 
@@ -57,10 +59,16 @@ public class ProductController extends HttpServlet {
         context.setVariable("category_selector", categoryId);
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("supplier_selector", supplierId);
-        context.setVariable("products", ((ProductDaoMem) productDataStore).getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId)));
+        System.out.println(productCategoryDataStore.find(categoryId) + "dasgfgfdsgf");
+        System.out.println(supplierDataStore.find(supplierId)+ "dasgfdgdfg");
+        System.out.println(Arrays.toString(((ProductDaoJDBC) productDataStoreJDBC).getData().toArray()));
+        context.setVariable("products", (productDataStoreJDBC.getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId))));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
 
         System.out.println(productDataStore.getAll().toString());
+        System.out.println(supplierDataStore.getAll().toString());
+        System.out.println(productCategoryDataStore.getAll().toString());
+
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
@@ -75,7 +83,7 @@ public class ProductController extends HttpServlet {
         try {
             id = Integer.valueOf(urlId);
             if (id > max || id < 0 ) {
-                id = 1;
+                id = 0;
             }
         }
         catch (Exception e) {

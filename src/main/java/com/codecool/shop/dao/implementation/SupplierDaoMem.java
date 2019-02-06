@@ -43,4 +43,16 @@ public class SupplierDaoMem implements SupplierDao {
     public List<Supplier> getAll() {
         return data;
     }
+
+    @Override
+    public boolean isInList(String name) {
+        for (Supplier supplier: data
+             ) {
+            if (supplier.getName().equals(name)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

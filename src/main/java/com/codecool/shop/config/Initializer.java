@@ -28,32 +28,32 @@ public class Initializer implements ServletContextListener {
         ShoppingCartDao shoppingCartDataStore = ShoppingCartDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier allSupplier = new Supplier("All", "All items.");
-        supplierDataStore.add(allSupplier);
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
-        supplierDataStore.add(amazon);
-        Supplier lenovo = new Supplier("Lenovo", "Computers");
-        supplierDataStore.add(lenovo);
-        Supplier mentors = new Supplier("Mentors", "Mentorship is a relationship in which a more experienced or more knowledgeable person helps to guide a less experienced or less knowledgeable person.");
-        supplierDataStore.add(mentors);
+//        Supplier allSupplier = new Supplier("All", "All items.");
+//        supplierDataStore.add(allSupplier);
+//        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+//        supplierDataStore.add(amazon);
+//        Supplier lenovo = new Supplier("Lenovo", "Computers");
+//        supplierDataStore.add(lenovo);
+//        Supplier mentors = new Supplier("Mentors", "Mentorship is a relationship in which a more experienced or more knowledgeable person helps to guide a less experienced or less knowledgeable person.");
+//        supplierDataStore.add(mentors);
 
         //setting up a new product category
-        ProductCategory allCategory = new ProductCategory("All", "All", "All items.");
-        productCategoryDataStore.add(allCategory);
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
-        productCategoryDataStore.add(tablet);
-        ProductCategory phone = new ProductCategory("Phone", "Hardware", "A mobile phone that has a touchscreen interface, Internet access, and an operating system capable of running downloaded apps.");
-        productCategoryDataStore.add(phone);
-        ProductCategory softSkill = new ProductCategory("Soft Skill", "HR", "Soft skills are a combination of people skills, social skills, communication skills, character or personality traits, attitudes, career attribute, social intelligence and emotional intelligence quotients among others that enable people to navigate their environment, work well with others, perform well, and achieve their goals");
-        productCategoryDataStore.add(softSkill);
-        ProductCategory hardSkill = new ProductCategory("Hard Skill", "Mentoring", "Hard skills, also called technical skills, are any skills relating to a specific task or situation. It involves both understanding and proficiency in such specific activity that involves methods, processes, procedures, or techniques");
-        productCategoryDataStore.add(hardSkill);
-        ProductCategory hardware = new ProductCategory("Hardware", "IT", "Computer hardware includes the physical, tangible parts or components of a computer, such as the cabinet, central processing unit, monitor, keyboard, computer data storage, graphic card, sound card, speakers and motherboard");
-        productCategoryDataStore.add(hardware);
-        ProductCategory consultation = new ProductCategory("Consultation", "Mentoring", "A meeting with an expert, such as a medical doctor, in order to seek advice.");
-        productCategoryDataStore.add(consultation);
-        ProductCategory workshop = new ProductCategory("Workshop", "Mentoring", "a meeting at which a group of people engage in intensive discussion and activity on a particular subject or project.");
-        productCategoryDataStore.add(workshop);
+//        ProductCategory allCategory = new ProductCategory("All", "All", "All items.");
+//        productCategoryDataStore.add(allCategory);
+//        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+//        productCategoryDataStore.add(tablet);
+//        ProductCategory phone = new ProductCategory("Phone", "Hardware", "A mobile phone that has a touchscreen interface, Internet access, and an operating system capable of running downloaded apps.");
+//        productCategoryDataStore.add(phone);
+//        ProductCategory softSkill = new ProductCategory("Soft Skill", "HR", "Soft skills are a combination of people skills, social skills, communication skills, character or personality traits, attitudes, career attribute, social intelligence and emotional intelligence quotients among others that enable people to navigate their environment, work well with others, perform well, and achieve their goals");
+//        productCategoryDataStore.add(softSkill);
+//        ProductCategory hardSkill = new ProductCategory("Hard Skill", "Mentoring", "Hard skills, also called technical skills, are any skills relating to a specific task or situation. It involves both understanding and proficiency in such specific activity that involves methods, processes, procedures, or techniques");
+//        productCategoryDataStore.add(hardSkill);
+//        ProductCategory hardware = new ProductCategory("Hardware", "IT", "Computer hardware includes the physical, tangible parts or components of a computer, such as the cabinet, central processing unit, monitor, keyboard, computer data storage, graphic card, sound card, speakers and motherboard");
+//        productCategoryDataStore.add(hardware);
+//        ProductCategory consultation = new ProductCategory("Consultation", "Mentoring", "A meeting with an expert, such as a medical doctor, in order to seek advice.");
+//        productCategoryDataStore.add(consultation);
+//        ProductCategory workshop = new ProductCategory("Workshop", "Mentoring", "a meeting at which a group of people engage in intensive discussion and activity on a particular subject or project.");
+//        productCategoryDataStore.add(workshop);
 
 
 

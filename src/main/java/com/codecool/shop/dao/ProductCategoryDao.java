@@ -12,4 +12,7 @@ public interface ProductCategoryDao {
 
     List<ProductCategory> getAll();
 
+    boolean isInList(String name);
+
+
 }
