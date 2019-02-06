@@ -22,7 +22,7 @@ SET row_security = off;
 CREATE DATABASE postgres WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
 
 
-ALTER DATABASE postgres OWNER TO postgres;
+ALTER DATABASE postgres OWNER TO laci;
 
 \connect postgres
 
@@ -62,7 +62,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: order; Type: TABLE; Schema: public; Owner: postgres
+-- Name: order; Type: TABLE; Schema: public; Owner: laci
 --
 
 CREATE TABLE public."order" (
@@ -70,7 +70,7 @@ CREATE TABLE public."order" (
 );
 
 
-ALTER TABLE public."order" OWNER TO postgres;
+ALTER TABLE public."order" OWNER TO laci;
 
 --
 -- Name: order_orderid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -85,7 +85,7 @@ CREATE SEQUENCE public.order_orderid_seq
     CACHE 1;
 
 
-ALTER TABLE public.order_orderid_seq OWNER TO postgres;
+ALTER TABLE public.order_orderid_seq OWNER TO laci;
 
 --
 -- Name: order_orderid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -107,7 +107,7 @@ CREATE TABLE public.product (
 );
 
 
-ALTER TABLE public.product OWNER TO postgres;
+ALTER TABLE public.product OWNER TO laci;
 
 --
 -- Name: product_category; Type: TABLE; Schema: public; Owner: postgres
@@ -120,7 +120,7 @@ CREATE TABLE public.product_category (
 );
 
 
-ALTER TABLE public.product_category OWNER TO postgres;
+ALTER TABLE public.product_category OWNER TO laci;
 
 --
 -- Name: supplier; Type: TABLE; Schema: public; Owner: postgres
@@ -132,7 +132,7 @@ CREATE TABLE public.supplier (
 );
 
 
-ALTER TABLE public.supplier OWNER TO postgres;
+ALTER TABLE public.supplier OWNER TO laci;
 
 --
 -- Name: table_name_productid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -147,7 +147,7 @@ CREATE SEQUENCE public.table_name_productid_seq
     CACHE 1;
 
 
-ALTER TABLE public.table_name_productid_seq OWNER TO postgres;
+ALTER TABLE public.table_name_productid_seq OWNER TO laci;
 
 --
 -- Name: table_name_productid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -167,7 +167,7 @@ CREATE TABLE public."user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO postgres;
+ALTER TABLE public."user" OWNER TO laci;
 
 --
 -- Name: user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -182,7 +182,7 @@ CREATE SEQUENCE public.user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_id_seq OWNER TO postgres;
+ALTER TABLE public.user_id_seq OWNER TO laci;
 
 --
 -- Name: user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres

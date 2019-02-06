@@ -58,7 +58,7 @@ public class Initializer implements ServletContextListener {
 
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
+       /* productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
         productDataStore.add(new Product("Lenovo 8", 80, "USD", "Lenovo's latest smartphone", phone, lenovo));
@@ -73,7 +73,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Active Listening", 10, "USD", "I wasn't paying attention", workshop,mentors));
         productDataStore.add(new Product("JavaScript", 7500, "USD", "Javascript is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.", hardSkill,mentors));
         productDataStore.add(new Product("UML", 250, "USD", "UML (Unified Modeling Language) is a standard language for specifying, visualizing, constructing, and documenting the artifacts of software systems. UML was created by the Object Management Group (OMG)", hardSkill,mentors));
-
+*/
 
         //setting up shopping carts
         ShoppingCart cart = new ShoppingCart("default", "default");

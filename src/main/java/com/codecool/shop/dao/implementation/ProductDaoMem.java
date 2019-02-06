@@ -66,6 +66,7 @@ public class ProductDaoMem implements ProductDao {
         }
     }
 
+    @Override
     public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
         List<Product> filteredByCategory = getBy(productCategory);
         if(supplier.getName().equals("All")) {
