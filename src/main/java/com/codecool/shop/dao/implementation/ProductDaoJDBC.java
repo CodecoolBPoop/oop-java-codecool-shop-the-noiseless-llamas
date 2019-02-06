@@ -11,6 +11,8 @@ import java.util.List;
 
 public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
 
+    protected List<Product> data = new ArrayList<>();
+
 
     @Override
     public void add(Product product) {
@@ -29,7 +31,7 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
     @Override
     public List<Product> getAll() {
 
-            String query = "SELECT * FROM product";
+            String query = "SELECT * FROM product;";
             List<Product> productList = new ArrayList<>();
 
             try (Connection connection = getConnection();
@@ -48,6 +50,7 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
                     ProductCategory productCategoryObj = getProductCategory(product_category);
                     Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
                     productList.add(product);
+                    data = productList;
                 }
                 return productList;
 

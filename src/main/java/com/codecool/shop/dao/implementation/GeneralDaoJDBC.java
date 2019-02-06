@@ -10,15 +10,14 @@ import java.util.List;
 
 public abstract class GeneralDaoJDBC {
 
-    protected List<Product> data = new ArrayList<>();
+
     protected static final String DATABASE = System.getenv("DATABASE");
     protected static final String DB_USER = System.getenv("DB_USER");
     protected static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
 
     protected Supplier getSupplier(String supplierName) {
 
-        String query = "SELECT * FROM supplier " +
-                "WHERE name = " + supplierName + ";";
+        String query = "SELECT * FROM supplier;";
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
@@ -27,10 +26,13 @@ public abstract class GeneralDaoJDBC {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
-                Supplier supplier = new Supplier(name, description);
-                supplier.setId(id);
+                if (name.equals(supplierName)) {
+                    Supplier supplier = new Supplier(name, description);
+                    supplier.setId(id);
+                    return supplier;
+                }
 
-                return supplier;
+
             }
 
         } catch (SQLException e) {
@@ -42,8 +44,7 @@ public abstract class GeneralDaoJDBC {
 
     protected ProductCategory getProductCategory(String categoryName) {
 
-        String query = "SELECT * FROM product_category " +
-                "WHERE name = " + categoryName + ";";
+        String query = "SELECT * FROM product_category;";
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
@@ -53,9 +54,10 @@ public abstract class GeneralDaoJDBC {
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
                 String department = resultSet.getString("department");
-                ProductCategory productCategory = new ProductCategory(name, department, description);
-
-                return productCategory;
+                if (name.equals(categoryName)) {
+                    ProductCategory productCategory = new ProductCategory(name, department, description);
+                    return productCategory;
+                }
             }
 
         } catch (SQLException e) {
