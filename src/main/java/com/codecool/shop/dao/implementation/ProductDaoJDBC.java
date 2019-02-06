@@ -30,6 +30,7 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
     public List<Product> getAll() {
 
             String query = "SELECT * FROM product";
+            List<Product> productList = new ArrayList<>();
 
             try (Connection connection = getConnection();
                  Statement statement =connection.createStatement();
@@ -46,10 +47,9 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
                     Supplier supplierObj = getSupplier(supplier);
                     ProductCategory productCategoryObj = getProductCategory(product_category);
                     Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
-                    List<Product> productList = new ArrayList<>();
                     productList.add(product);
-                    return productList;
                 }
+                return productList;
 
             } catch (SQLException e) {
                 e.printStackTrace();

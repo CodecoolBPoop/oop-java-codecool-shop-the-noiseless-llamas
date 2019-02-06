@@ -66,11 +66,18 @@ public abstract class GeneralDaoJDBC {
     }
 
     protected Connection getConnection() throws SQLException {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return DriverManager.getConnection(
                 DATABASE,
                 DB_USER,
                 DB_PASSWORD);
     }
+
+
 
 
     protected void executeQuery(String query) {

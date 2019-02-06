@@ -24,8 +24,9 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = new ProductDaoJDBC();
-        System.out.println(productDataStore.getAll().toString());
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStoreJDBC = new ProductDaoJDBC();
+        System.out.println(productDataStoreJDBC.getAll().toString());
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ShoppingCartDao shoppingCartsDataStore = ShoppingCartDaoMem.getInstance();
