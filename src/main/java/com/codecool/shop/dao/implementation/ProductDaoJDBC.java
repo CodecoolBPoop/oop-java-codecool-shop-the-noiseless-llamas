@@ -22,36 +22,8 @@ public class ProductDaoJDBC implements ProductDao {
     }
 
     @Override
-    public Product find(int id) {
+    public Product find(int id) {return null;}
 
-        String query = "SELECT * FROM product";
-
-        try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query);
-        ){
-            while (resultSet.next()){
-                    int productid = resultSet.getInt("productid");
-                    String name = resultSet.getString("name");
-                    String description = resultSet.getString("description");
-                    float price = resultSet.getInt("price");
-                    String currency = resultSet.getString("currency");
-                    String supplier = resultSet.getString("supplier");
-                    String product_category = resultSet.getString("product_category");
-                    // we have to create the supplier and product_category from the received String, and then add it to the Product constructor
-                    Product product = new Product(productid, name, price, currency, description, null, null);
-
-                return product;
-            } else {
-                return null;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 
     @Override
     public void remove(int id) {
@@ -60,8 +32,39 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return null;
-    }
+
+            String query = "SELECT * FROM product";
+
+            try (Connection connection = getConnection();
+                 Statement statement =connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query);
+            ){
+                while (resultSet.next()){
+                    int productid = resultSet.getInt("productid");
+                    String name = resultSet.getString("name");
+                    String description = resultSet.getString("description");
+                    float price = resultSet.getInt("price");
+                    String currency = resultSet.getString("currency");
+                    String supplier = resultSet.getString("supplier");
+                    String product_category = resultSet.getString("product_category");
+
+
+                    // we have to create the supplier and product_category from the received String, and then add it to the Product constructor
+                    Product product = new Product(productid, name, price, currency, description, null, null);
+                    List<Product> productList = new ArrayList<>();
+                    productList.add(product);
+                    return productList;
+                } else {
+                    return null;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
 
     @Override
     public List<Product> getBy(Supplier supplier) {
