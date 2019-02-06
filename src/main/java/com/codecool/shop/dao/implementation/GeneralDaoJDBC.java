@@ -29,6 +29,7 @@ public abstract class GeneralDaoJDBC {
                 if (name.equals(supplierName)) {
                     Supplier supplier = new Supplier(name, description);
                     supplier.setId(id);
+                    connection.close();
                     return supplier;
                 }
 
@@ -56,6 +57,7 @@ public abstract class GeneralDaoJDBC {
                 String department = resultSet.getString("department");
                 if (name.equals(categoryName)) {
                     ProductCategory productCategory = new ProductCategory(name, department, description);
+                    connection.close();
                     productCategory.setId(id);
                     return productCategory;
                 }
@@ -94,8 +96,4 @@ public abstract class GeneralDaoJDBC {
             e.printStackTrace();
         }
     }
-
-
-
-
 }

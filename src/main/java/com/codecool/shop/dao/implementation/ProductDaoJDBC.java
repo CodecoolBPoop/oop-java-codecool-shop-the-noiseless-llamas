@@ -72,14 +72,16 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
                     }
                     Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
                     productList.add(product);
+                    ProductDao productDataStore = ProductDaoMem.getInstance();
+                    productDataStore.add(product);
                     data = productList;
                 }
+                connection.close();
                 return productList;
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 

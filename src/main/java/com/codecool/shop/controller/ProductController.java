@@ -26,8 +26,9 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductDao productDataStoreJDBC = new ProductDaoJDBC();
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+
         System.out.println(productDataStoreJDBC.getAll().toString());
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -59,16 +60,14 @@ public class ProductController extends HttpServlet {
         context.setVariable("category_selector", categoryId);
         context.setVariable("suppliers", supplierDataStore.getAll());
         context.setVariable("supplier_selector", supplierId);
-        System.out.println(productCategoryDataStore.find(categoryId) + "dasgfgfdsgf");
-        System.out.println(supplierDataStore.find(supplierId)+ "dasgfdgdfg");
-        System.out.println(Arrays.toString(((ProductDaoJDBC) productDataStoreJDBC).getData().toArray()));
-        context.setVariable("products", (productDataStoreJDBC.getBy(productCategoryDataStore.find(categoryId), supplierDataStore.find(supplierId))));
+        System.out.println(supplierId);
+        System.out.println(categoryId);
+        System.out.println(productCategoryDataStore.find(categoryId));
+        System.out.println(supplierDataStore.find(supplierId));
+        context.setVariable("products", productDataStoreJDBC.getBy(productCategoryDataStore.find(categoryId),supplierDataStore.find(supplierId)));
         context.setVariable("cart", shoppingCartsDataStore.find(1));
 
         System.out.println(productDataStore.getAll().toString());
-        System.out.println(supplierDataStore.getAll().toString());
-        System.out.println(productCategoryDataStore.getAll().toString());
-
 
 //        Map params = new HashMap<>();
 //        params.put("category", productCategoryDataStore.find(1));
