@@ -43,15 +43,12 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
                     String currency = resultSet.getString("currency");
                     String supplier = resultSet.getString("supplier");
                     String product_category = resultSet.getString("product_category");
-
-
-                    // we have to create the supplier and product_category from the received String, and then add it to the Product constructor
-                    Product product = new Product(productid, name, price, currency, description, null, null);
+                    Supplier supplierObj = getSupplier(supplier);
+                    ProductCategory productCategoryObj = getProductCategory(product_category);
+                    Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
                     List<Product> productList = new ArrayList<>();
                     productList.add(product);
                     return productList;
-                } else {
-                    return null;
                 }
 
             } catch (SQLException e) {
