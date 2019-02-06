@@ -53,12 +53,12 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
                     ProductDao productDataStore = ProductDaoMem.getInstance();
                     productDataStore.add(product);
                 }
+                connection.close();
                 return productList;
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
 
