@@ -56,6 +56,7 @@ public abstract class GeneralDaoJDBC {
                 String department = resultSet.getString("department");
                 if (name.equals(categoryName)) {
                     ProductCategory productCategory = new ProductCategory(name, department, description);
+                    productCategory.setId(id);
                     return productCategory;
                 }
             }
