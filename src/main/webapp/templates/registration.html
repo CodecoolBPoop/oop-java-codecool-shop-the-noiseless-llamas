@@ -39,28 +39,12 @@
 </head>
 
 <body>
-<script>
-    let password = document.getElementById("password")
-        , confirm_password = document.getElementById("confirm_password"),
-        button = document.getElementById("submit");
-    console.log(password, confirm_password);
-    function validatePassword(){
-        if(password.value !== confirm_password.value) {
-            confirm_password.alert("Passwords Don't Match");
-        } else {
-            confirm_password.setCustomValidity('');
-        }
-    }
-    if (button) {
-        button.addEventListener("click", validatePassword());
-    }
-</script>
 <form method="post">
     <fieldset>
     <div class="form-row mt-3">
     <label class="col-sm-3 control-label">Email address:  </label>
 
-    <input type="text" class="form-control" name="email" placeholder="E-mail" required>
+    <input type="email" class="form-control" name="email" placeholder="E-mail" required>
 
         <label class="col-sm-3 control-label">Password  </label>
             <input type="password" class="form-control" name="password1" id="password" placeholder="Password" required>
@@ -72,12 +56,12 @@
                 if (input.value != document.getElementById('password').value) {
                     input.setCustomValidity('Password Must be Matching.');
                 } else {
-                    // input is valid -- reset the error message
                     input.setCustomValidity('');
                 }
             }
         </script>
         <br /><br />
+
 
         <button class="btn btn-primary" type="submit" id="submit">Register</button>
         </fieldset>
