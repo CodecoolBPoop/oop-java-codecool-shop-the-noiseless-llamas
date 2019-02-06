@@ -17,8 +17,8 @@ public abstract class GeneralDaoJDBC {
 
     protected Supplier getSupplier(String supplierName) {
 
-        String query = "SELECT * FROM supplier" +
-                "WHERE name = '" + supplierName + "';";
+        String query = "SELECT * FROM supplier " +
+                "WHERE name = " + supplierName + ";";
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
@@ -42,8 +42,8 @@ public abstract class GeneralDaoJDBC {
 
     protected ProductCategory getProductCategory(String categoryName) {
 
-        String query = "SELECT * FROM product_category" +
-                "WHERE name = '" + categoryName + "';";
+        String query = "SELECT * FROM product_category " +
+                "WHERE name = " + categoryName + ";";
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query);
