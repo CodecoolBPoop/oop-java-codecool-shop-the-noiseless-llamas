@@ -12,10 +12,4 @@ import java.util.List;
 
 public class ProductCategoryDaoJDBC extends GeneralDaoJDBC implements ProductCategoryDao {
 
-    private List<Product> data = new ArrayList<>();
-    private static final String DATABASE = System.getenv("DATABASE");
-    private static final String DB_USER = System.getenv("DB_USER");
-    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
-
-
 }
