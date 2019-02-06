@@ -36,7 +36,7 @@ public class RegistrationController extends HttpServlet {
         System.out.println(passwordRepeat + " anyád");
 
 
-    if (password == passwordRepeat){
+    if (password.equals(passwordRepeat)){
         sendEmail.main();
         }
        /* if (password == passwordRepeat)      {
