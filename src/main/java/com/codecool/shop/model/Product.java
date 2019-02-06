@@ -92,11 +92,16 @@ public class Product extends BaseModel {
                         "defaultCurrency: %4$s, " +
                         "productCategory: %5$s, " +
                         "supplier: %6$s",
-                this.id,
+                this.productid,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
                 this.supplier.getName());
+    }
+
+    @Override
+    public int getId() {
+        return productid;
     }
 }
