@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop Register</title>
+
+
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <!--Font Awesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <div class="jumbotron text-center">
+        <h1>Codecool Shop Registration</h1>
+    </div>
+
+
+</head>
+
+<body>
+<script>
+    let password = document.getElementById("password")
+        , confirm_password = document.getElementById("confirm_password"),
+        button = document.getElementById("submit");
+    console.log(password, confirm_password);
+    function validatePassword(){
+        if(password.value !== confirm_password.value) {
+            confirm_password.alert("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+    if (button) {
+        button.addEventListener("click", validatePassword());
+    }
+</script>
+<form method="post">
+    <fieldset>
+    <div class="form-row mt-3">
+    <label class="col-sm-3 control-label">Email address:  </label>
+
+    <input type="text" class="form-control" name="email" placeholder="E-mail" required>
+
+        <label class="col-sm-3 control-label">Password  </label>
+            <input type="password" class="form-control" name="password1" id="password" placeholder="Password" required>
+        <p>Confirm Password:</p>
+            <input type="password" class="form-control" name="password2" id="password_confirm" placeholder="Password" required oninput="check(this)" />
+    </div>
+        <script language='javascript' type='text/javascript'>
+            function check(input) {
+                if (input.value != document.getElementById('password').value) {
+                    input.setCustomValidity('Password Must be Matching.');
+                } else {
+                    // input is valid -- reset the error message
+                    input.setCustomValidity('');
+                }
+            }
+        </script>
+        <br /><br />
+
+        <button class="btn btn-primary" type="submit" id="submit">Register</button>
+        </fieldset>
+    </div>
+</form>
+
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>

@@ -36,54 +36,70 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
     @Override
     public List<Product> getAll() {
 
-
-            Supplier allSupplier = new Supplier("All", "All items.");
-            allSupplier.setId(0);
-            if (!supplierDataStore.isInList(allSupplier.getName())) {
-                supplierDataStore.add(allSupplier);
-            }
-            ProductCategory allCategory = new ProductCategory("All", "All", "All items.");
-            allCategory.setId(0);
-            if (!productCategoryDataStore.isInList(allCategory.getName())) {
-                productCategoryDataStore.add(allCategory);
-            }
-            String query = "SELECT * FROM product;";
+        setSupplier();
+        setProductCategory();
+        String query = "SELECT * FROM product;";
             List<Product> productList = new ArrayList<>();
-
             try (Connection connection = getConnection();
                  Statement statement =connection.createStatement();
-                 ResultSet resultSet = statement.executeQuery(query);
-            ){
-                while (resultSet.next()){
-                    int productid = resultSet.getInt("productid");
-                    String name = resultSet.getString("name");
-                    String description = resultSet.getString("description");
-                    float price = resultSet.getInt("price");
-                    String currency = resultSet.getString("currency");
-                    String supplier = resultSet.getString("supplier");
-                    String product_category = resultSet.getString("product_category");
-                    Supplier supplierObj = getSupplier(supplier);
-                    if (!supplierDataStore.isInList(supplierObj.getName())) {
-                        supplierDataStore.add(supplierObj);
-                    }
-                    ProductCategory productCategoryObj = getProductCategory(product_category);
-                    if (!productCategoryDataStore.isInList(productCategoryObj.getName())) {
-                        productCategoryDataStore.add(productCategoryObj);
-                    }
-                    Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
-                    productList.add(product);
-                    ProductDao productDataStore = ProductDaoMem.getInstance();
-                    productDataStore.add(product);
-                    data = productList;
-                }
-                connection.close();
-                return productList;
-
+                 ResultSet resultSet = statement.executeQuery(query);)
+            {
+                return getProducts(productList, connection, resultSet);
             } catch (SQLException e) {
-                e.printStackTrace();
-            }
+                e.printStackTrace();}
             return null;
         }
+
+    private List<Product> getProducts(List<Product> productList, Connection connection, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()){
+            int productid = resultSet.getInt("productid");
+            float price = resultSet.getInt("price");
+            String name = resultSet.getString("name");
+            String description = resultSet.getString("description");
+            String currency = resultSet.getString("currency");
+            String supplier = resultSet.getString("supplier");
+            String product_category = resultSet.getString("product_category");
+            Supplier supplierObj = getSupplier(supplier);
+            ProductCategory productCategoryObj = getProductCategory(product_category, supplierObj);
+            Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
+            uploadData(productList, product);}
+        connection.close();
+        return productList;
+    }
+
+    private void uploadData(List<Product> productList, Product product) {
+        productList.add(product);
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        productDataStore.add(product);
+        data = productList;
+    }
+
+    private ProductCategory getProductCategory(String product_category, Supplier supplierObj) {
+        if (!supplierDataStore.isInList(supplierObj.getName())) {
+            supplierDataStore.add(supplierObj);
+        }
+        ProductCategory productCategoryObj = getProductCategory(product_category);
+        if (!productCategoryDataStore.isInList(productCategoryObj.getName())) {
+            productCategoryDataStore.add(productCategoryObj);
+        }
+        return productCategoryObj;
+    }
+
+    private void setProductCategory() {
+        ProductCategory allCategory = new ProductCategory("All", "All", "All items.");
+        allCategory.setId(0);
+        if (!productCategoryDataStore.isInList(allCategory.getName())) {
+            productCategoryDataStore.add(allCategory);
+        }
+    }
+
+    private void setSupplier() {
+        Supplier allSupplier = new Supplier("All", "All items.");
+        allSupplier.setId(0);
+        if (!supplierDataStore.isInList(allSupplier.getName())) {
+            supplierDataStore.add(allSupplier);
+        }
+    }
 
 
     @Override
