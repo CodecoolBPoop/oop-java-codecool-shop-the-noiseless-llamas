@@ -63,7 +63,7 @@ public class ProductDaoJDBC extends GeneralDaoJDBC implements ProductDao {
             ProductCategory productCategoryObj = getProductCategory(product_category, supplierObj);
             Product product = new Product(productid, name, price, currency, description, productCategoryObj, supplierObj);
             uploadData(productList, product);}
-        connection.close();
+        //connection.close();
         return productList;
     }
 

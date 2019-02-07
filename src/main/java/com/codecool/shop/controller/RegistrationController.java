@@ -2,7 +2,6 @@ package com.codecool.shop.controller;
 
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.implementation.RegistrationDaoJDBC;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,7 +18,9 @@ public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request, response);
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+        WebContext context = new WebContext(request, response, request.getServletContext());
+        engine.process("registration.html", context, response.getWriter());
 
     }
 
@@ -38,8 +39,8 @@ public class RegistrationController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
         WebContext context = new WebContext(request, response, request.getServletContext());
         engine.process("registration.html", context, response.getWriter());
-        RegistrationDaoJDBC registration = new RegistrationDaoJDBC();
-        registration.saveToDB(emailAddress, password);
+        //RegistrationDaoJDBC registration = new RegistrationDaoJDBC();
+       // registration.saveToDB(emailAddress, password);
     }
 
 
